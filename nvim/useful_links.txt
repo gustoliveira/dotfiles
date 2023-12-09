@@ -1,0 +1,26 @@
+# Complete sheet cheat
+https://vim.rtorr.com/
+
+# Video grande ensinando quase tudo
+https://www.youtube.com/watch?v=lm7y2hI6zME&ab_channel=ManualdoC%C3%B3digo
+https://www.manualdocodigo.com.br/vim-basico/
+
+# Video bom ensinando coisas mais simples
+https://www.youtube.com/watch?v=kZDT10nFiTY&ab_channel=PagarmeTalks
+
+# 0 to LSP ThePrimeagen
+https://www.youtube.com/watch?v=w7i4amO_zaE&t=232s&ab_channel=ThePrimeagen
+https://github.com/ThePrimeagen/init.lua
+
+# Vim be good by ThePrimeagen, games to understand vim commands and mechanics
+https://github.com/ThePrimeagen/vim-be-good
+
+# NeoVim complete to Flutter
+https://www.youtube.com/watch?v=E29ij9baGPw&ab_channel=RobertBrunhage
+
+# Dotfiles do Niltao
+https://github.com/niltonvasques/dotfiles/blob/master/.vim/vimrc
+
+### Coisas importantes para aprender ainda
+- Como trabalhar com tabs diferentes
+
