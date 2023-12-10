@@ -42,5 +42,7 @@ Plug('VonHeikemen/lsp-zero.nvim', {branch = 'v3.x'})
 Plug 'j-hui/fidget.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 
+Plug 'mhinz/vim-signify'
+
 vim.call('plug#end')
 
