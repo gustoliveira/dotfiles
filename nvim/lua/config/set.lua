@@ -41,9 +41,9 @@ vim.opt.autoread = true         -- Update vim after file update from outside
 
 vim.opt.mouse=a                 -- Enable mouse support
 
--- filetype on                  -- Detect and vim.opt.the filetype option and trigger the FileType Event
--- filetype plugin on           -- Load the plugin file for the file type, if any
--- filetype indent on           -- Load the indent file for the file type, if any
+vim.cmd('filetype on')                  -- Detect and vim.opt.the filetype option and trigger the FileType Event
+vim.cmd('filetype plugin on')           -- Load the plugin file for the file type, if any
+vim.cmd('filetype indent on')           -- Load the indent file for the file type, if any
 
 -- Enable persistent undo
 vim.opt.undofile = true                                 -- Persistent undo
