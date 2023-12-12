@@ -1,13 +1,5 @@
 vim.cmd('syntax on')
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
 vim.opt.hidden = true           -- Hides the current buffer when a new file is openned
 vim.opt.number = true           -- Enable line numbers
 vim.opt.relativenumber = true   -- Show relative line to your position
@@ -52,3 +44,4 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"  -- File where store the 
 vim.opt.showmatch = true        -- Show matching brackets
 
 vim.opt.termguicolors = true
+
