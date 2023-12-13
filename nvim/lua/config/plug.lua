@@ -44,5 +44,9 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 Plug 'mhinz/vim-signify'
 
+Plug 'preservim/nerdtree'
+
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 vim.call('plug#end')
 
