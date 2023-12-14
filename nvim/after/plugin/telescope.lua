@@ -6,6 +6,13 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 require("telescope").setup {
+    pickers = {
+        buffers = {
+            show_all_buffers = true,
+            sort_mru = true,
+            ignore_current_buffer = true,
+        }
+    },
     extensions = {
         ["ui-select"] = {
             require("telescope.themes").get_dropdown {  }
