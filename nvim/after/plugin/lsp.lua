@@ -40,6 +40,8 @@ lsp_config["dartls"].setup({
     }
 })
 
+lsp_config["ruby_ls"].setup({})
+
 lsp_zero.setup()
 
 require("fidget").setup({})
