@@ -15,7 +15,7 @@ vim.opt.incsearch = true        -- Incremental search
 vim.opt.ignorecase = true       -- Ingore case in search
 vim.opt.smartcase = true        -- Consider case if there is a upper case character
 
-vim.opt.scrolloff = 8           -- Minimum number of lines to keep above and below the cursor
+vim.opt.scrolloff = 10           -- Minimum number of lines to keep above and below the cursor
 
 vim.opt.colorcolumn = '100'     -- Draws a line at the given line to keep aware of the line size
 vim.opt.signcolumn = 'yes'      -- Add a column on the left. Useful for linting
