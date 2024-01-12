@@ -8,5 +8,10 @@ vim.keymap.set("n", "td", vim.cmd.bd)               -- Delete buffer
 
 vim.keymap.set("n", "tc", vim.cmd.noh)              -- Clean searchs
 
--- nmap te :tabe<CR>   " Create new tab
+vim.keymap.set("x", "<leader>p", [["_dP]])          -- Paste something without yank the selected words
+
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])    -- Paste the selected words to outside
+vim.keymap.set("n", "<leader>Y", [["+Y]])           -- Paste the selected line to outside
+
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])    -- Delete without adding to yank
 
