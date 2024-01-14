@@ -1,6 +1,7 @@
 local lsp_zero = require('lsp-zero')
 local lsp_config = require('lspconfig')
 local cmp = require('cmp')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lsp_zero.preset('recommended')
 
@@ -22,12 +23,14 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 vim.diagnostic.config({
-        virtual_text = true,
-        signs = false,
-    })
+    virtual_text = true,
+    signs = false,
+})
 
+-- Dart LSP Config
 lsp_config["dartls"].setup({
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         dart = {
             analysisExcludedFolders = {
@@ -40,7 +43,23 @@ lsp_config["dartls"].setup({
     }
 })
 
-lsp_config["ruby_ls"].setup({})
+-- Ruby LSP Config
+lsp_config["ruby_ls"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+-- JavaScrip and TypeScript LSP Config
+lsp_config["tsserver"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+-- HTML LSP Config
+lsp_config["html"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
 
 lsp_zero.setup()
 

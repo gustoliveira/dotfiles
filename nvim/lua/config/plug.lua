@@ -32,11 +32,14 @@ Plug 'preservim/nerdcommenter'
 
 -- LSP Support - lsp-zero
 Plug 'neovim/nvim-lspconfig'
+
 -- Autocompletion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
 Plug('VonHeikemen/lsp-zero.nvim', {branch = 'v3.x'})
+Plug "rafamadriz/friendly-snippets"
+Plug "saadparwaiz1/cmp_luasnip"
 
 -- LSP aditionals
 Plug 'j-hui/fidget.nvim'
@@ -45,8 +48,6 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'mhinz/vim-signify'
 
 Plug 'preservim/nerdtree'
-
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 vim.call('plug#end')
-
