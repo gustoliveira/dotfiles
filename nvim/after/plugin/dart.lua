@@ -5,4 +5,3 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=2 tabstop=2"
 })
 
-

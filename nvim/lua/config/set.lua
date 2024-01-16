@@ -4,9 +4,9 @@ vim.opt.hidden = true           -- Hides the current buffer when a new file is o
 vim.opt.number = true           -- Enable line numbers
 vim.opt.relativenumber = true   -- Show relative line to your position
 
-vim.opt.tabstop = 4             -- Show existing tab with 4 spaces width
-vim.opt.softtabstop = 4         -- Show existing tab with 4 spaces width
-vim.opt.shiftwidth = 4          -- When indenting with '>', use 4 spaces width
+vim.opt.tabstop = 2             -- Show existing tab with 4 spaces width
+vim.opt.softtabstop = 2         -- Show existing tab with 4 spaces width
+vim.opt.shiftwidth = 2          -- When indenting with '>', use 4 spaces width
 vim.opt.expandtab = true        -- On pressing tab, insert 4 spaces
 vim.opt.smarttab = true         -- insert tabs on the start of a line according to shiftwidth
 vim.opt.smartindent = true      -- Automatically inserts one extra level of indentation in some cases

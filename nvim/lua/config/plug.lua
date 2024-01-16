@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
 
 Plug 'dart-lang/dart-vim-plugin'			-- Dart Syntax Highlighting and autocomplete
 
