@@ -4,9 +4,11 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
 Plug 'sainnhe/sonokai'
 
-Plug 'vim-airline/vim-airline'
+--Plug 'vim-airline/vim-airline'
+--Plug 'vim-airline/vim-airline-themes'
 
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/git-messenger.vim'
@@ -50,5 +52,13 @@ Plug 'mhinz/vim-signify'
 
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'MunifTanjim/eslint.nvim'
+
+Plug('prettier/vim-prettier', {
+  ['do'] = 'yarn install --frozen-lockfile --production',
+  ['for'] = {'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html', 'javascriptreact'
+}})
 
 vim.call('plug#end')

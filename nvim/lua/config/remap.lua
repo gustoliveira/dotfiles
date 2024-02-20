@@ -15,3 +15,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])           -- Paste the selected line t
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])    -- Delete without adding to yank
 
+vim.keymap.set({"n", "v"}, "<leader>cp", [[:let @+=expand('%')<CR>]])
+vim.keymap.set({"n", "v"}, "<leader>cP", [[:let @+=expand('%:p')<CR>]])
+vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]])
+

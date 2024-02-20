@@ -43,5 +43,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"  -- File where store the 
 
 vim.opt.showmatch = true        -- Show matching brackets
 
+vim.opt.laststatus = 3
+
 vim.opt.termguicolors = true
 
