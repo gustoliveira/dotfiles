@@ -4,9 +4,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
 Plug 'sainnhe/sonokai'
 
---Plug 'vim-airline/vim-airline'
---Plug 'vim-airline/vim-airline-themes'
-
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 
