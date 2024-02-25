@@ -15,7 +15,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])           -- Paste the selected line t
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])    -- Delete without adding to yank
 
+-- Copy path to clipboard
 vim.keymap.set({"n", "v"}, "<leader>cp", [[:let @+=expand('%')<CR>]])
+-- Copy absolut path to clipboard
 vim.keymap.set({"n", "v"}, "<leader>cP", [[:let @+=expand('%:p')<CR>]])
+-- Copy file name to clipboard
 vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]])
 
