@@ -58,4 +58,7 @@ Plug('prettier/vim-prettier', {
   ['for'] = {'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html', 'javascriptreact'
 }})
 
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-repeat'
+
 vim.call('plug#end')
