@@ -27,6 +27,22 @@ git() {
         shift
         git add . ; git commit -m "$@" ; git push
 
+    elif [[ $1 == "c" ]]; then
+        shift
+        git checkout $(git branch | fzf | tr -d "[[:space:]]")
+
+    elif [[ $1 == "ca" ]]; then
+        shift
+        git checkout $(git branch --all | fzf | tr -d "[[:space:]]")
+
+    elif [[ $1 == "cr" ]]; then
+        shift
+        git checkout $(git branch --r | fzf | tr -d "[[:space:]]")
+
+    elif [[ $1 == "db" ]]; then
+        shift
+        git branch -d $(git branch --all | fzf | tr -d "[[:space:]]")
+
     else
         command git "$@"
     fi
