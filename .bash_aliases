@@ -43,6 +43,10 @@ git() {
         shift
         git branch -d $(git branch --all | fzf | tr -d "[[:space:]]")
 
+    elif [[ $1 == "cb" ]]; then
+        shift
+        git branch --all | fzf | copy
+
     else
         command git "$@"
     fi
