@@ -28,7 +28,7 @@ Plug 'nvim-lua/plenary.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'preservim/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 
 -- LSP Support - lsp-zero
 Plug 'neovim/nvim-lspconfig'
