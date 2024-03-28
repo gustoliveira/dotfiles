@@ -61,4 +61,6 @@ Plug('prettier/vim-prettier', {
 Plug 'ggandor/leap.nvim'
 Plug 'tpope/vim-repeat'
 
+Plug 'github/copilot.vim'
+
 vim.call('plug#end')
