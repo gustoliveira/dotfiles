@@ -47,9 +47,6 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 Plug 'mhinz/vim-signify'
 
-Plug 'preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'MunifTanjim/eslint.nvim'
 

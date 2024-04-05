@@ -22,3 +22,5 @@ vim.keymap.set({"n", "v"}, "<leader>cP", [[:let @+=expand('%:p')<CR>]])
 -- Copy file name to clipboard
 vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]])
 
+vim.keymap.set({"n", "v"}, "<leader>gg", [[:30 Lexplore %:p:h<CR>]]) -- Open the file explorer
+
