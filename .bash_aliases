@@ -1,3 +1,5 @@
+. /usr/share/autojump/autojump.sh
+
 # Aliases
 alias update='sudo apt update ; sudo apt upgrade ; sudo apt autoremove ; sudo apt autoclean'
 alias c='clear'
