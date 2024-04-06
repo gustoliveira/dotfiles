@@ -43,7 +43,7 @@ git() {
 
     elif [[ $1 == "db" ]]; then
         shift
-        git branch -d $(git branch --all | fzf | tr -d "[[:space:]]")
+        git branch -D $(git branch --all | fzf | tr -d "[[:space:]]")
 
     elif [[ $1 == "cb" ]]; then
         shift
