@@ -63,6 +63,12 @@ lsp_config["html"].setup({
     on_attach = on_attach,
 })
 
+-- Python LSP Config
+lsp_config["pyright"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
 lsp_zero.setup()
 
 require("fidget").setup({})

@@ -22,5 +22,23 @@ vim.keymap.set({"n", "v"}, "<leader>cP", [[:let @+=expand('%:p')<CR>]])
 -- Copy file name to clipboard
 vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]])
 
-vim.keymap.set({"n", "v"}, "<leader>gg", [[:30 Lexplore %:p:h<CR>]]) -- Open the file explorer
+vim.keymap.set({"n", "v"}, "<leader>ee", [[:30 Lexplore %:p:h<CR>]]) -- Open the file explorer
+
+vim.keymap.set({"n", "v"}, "<leader>f", [[zf<CR>]])
+
+vim.keymap.set({"n", "v"}, "<leader>w", vim.cmd.w) -- Save the file with leader + w
+vim.keymap.set({"n", "v"}, "<leader>q", vim.cmd.q) -- Close the buffer/split with leader + q
+
+vim.keymap.set("n", "<leader>gg", [[:Git<CR>]]) -- Open git status
+
+vim.keymap.set({"n", "v"}, "<leader>ee", [[:Oil<CR>]]) -- Open oil - explorer
+
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("hihlight_yank", { clear = true }),
+    callback = function()
+      vim.highlight.on_yank()
+    end
+  })
 

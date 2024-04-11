@@ -60,4 +60,6 @@ Plug 'tpope/vim-repeat'
 
 Plug 'github/copilot.vim'
 
+Plug 'stevearc/oil.nvim'
+
 vim.call('plug#end')
