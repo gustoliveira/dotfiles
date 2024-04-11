@@ -6,6 +6,7 @@ alias c='clear'
 alias copy='xclip -sel clip'
 alias ls='exa'
 alias history='history|rg'
+alias man='tldr'
 
 # Git aliases
 git() {
