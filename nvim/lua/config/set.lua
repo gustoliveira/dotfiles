@@ -31,7 +31,7 @@ vim.opt.splitbelow = true       -- Create the horizontal splits below
 
 vim.opt.autoread = true         -- Update vim after file update from outside
 
-vim.opt.mouse=a                 -- Enable mouse support
+vim.opt.mouse="a"                 -- Enable mouse support
 
 vim.cmd('filetype on')                  -- Detect and vim.opt.the filetype option and trigger the FileType Event
 vim.cmd('filetype plugin on')           -- Load the plugin file for the file type, if any

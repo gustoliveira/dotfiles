@@ -1,8 +1,9 @@
 local cmp = require("cmp")
+local luasnip = require('luasnip')
 
-require('luasnip').filetype_extend("javascriptreact", { "html" })
-require('luasnip').filetype_extend("javascript", { "html" })
-require('luasnip').filetype_extend("javascript", { "javascriptreact" })
+luasnip.filetype_extend("javascriptreact", { "html" })
+luasnip.filetype_extend("javascript", { "html" })
+luasnip.filetype_extend("javascript", { "javascriptreact" })
 
 require("luasnip.loaders.from_vscode").lazy_load()
 

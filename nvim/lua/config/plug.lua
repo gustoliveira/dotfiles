@@ -62,4 +62,8 @@ Plug 'github/copilot.vim'
 
 Plug 'stevearc/oil.nvim'
 
+Plug 'folke/trouble.nvim'
+
+Plug 'mbbill/undotree'
+
 vim.call('plug#end')
