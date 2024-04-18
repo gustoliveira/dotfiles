@@ -10,8 +10,6 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/git-messenger.vim'
 
-Plug 'dart-lang/dart-vim-plugin'			-- Dart Syntax Highlighting and autocomplete
-
 Plug 'sheerun/vim-polyglot'
 
 Plug 'ryanoasis/vim-devicons'
@@ -19,8 +17,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug('mg979/vim-visual-multi', { branch = 'master' })
 
 Plug 'jiangmiao/auto-pairs'
-
-Plug 'ThePrimeagen/vim-be-good'
 
 Plug('ThePrimeagen/harpoon', { branch = 'harpoon2' })
 

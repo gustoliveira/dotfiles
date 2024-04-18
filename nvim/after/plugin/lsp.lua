@@ -46,7 +46,7 @@ lsp_config["dartls"].setup({
 })
 
 -- Ruby LSP Config
-lsp_config["ruby_ls"].setup({
+lsp_config["ruby_lsp"].setup({
     capabilities = capabilities,
     on_attach = on_attach,
 })
