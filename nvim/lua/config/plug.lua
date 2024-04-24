@@ -62,4 +62,6 @@ Plug 'folke/trouble.nvim'
 
 Plug 'mbbill/undotree'
 
+Plug 'numToStr/Navigator.nvim'
+
 vim.call('plug#end')

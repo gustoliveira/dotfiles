@@ -13,6 +13,10 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]],
     { desc = "Delete without adding to yank" }
 )
 
+vim.keymap.set({"n", "v", "i"}, "<C-f>",  "<Nop>",
+    { desc = "Remove bind for Control + f - tmux prefix" }
+)
+
 vim.keymap.set({"n", "v"}, "<leader>cp", [[:let @+=expand('%')<CR>]],
     { desc = "Copy path to clipboard" }
 )
