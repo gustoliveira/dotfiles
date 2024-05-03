@@ -1,10 +1,13 @@
-. /usr/share/autojump/autojump.sh
+if [ -f /usr/share/autojump/autojump.sh ]; then
+    . /usr/share/autojump/autojump.sh
+fi
 
 # Aliases
 alias update='sudo apt update ; sudo apt upgrade ; sudo apt autoremove ; sudo apt autoclean'
 alias c='clear'
 alias copy='xclip -sel clip'
 alias ls='exa'
+alias lsa='ls -la'
 alias history='history|rg'
 alias man='tldr'
 

@@ -18,13 +18,13 @@ vim.keymap.set({"n", "v", "i"}, "<C-f>",  "<Nop>",
 )
 
 vim.keymap.set({"n", "v"}, "<leader>cp", [[:let @+=expand('%')<CR>]],
-    { desc = "Copy path to clipboard" }
+    { desc = "Copy path to clipboard", silent = true }
 )
 vim.keymap.set({"n", "v"}, "<leader>cP", [[:let @+=expand('%:p')<CR>]],
-    { desc = "Copy absolut path to clipboard" }
+    { desc = "Copy absolut path to clipboard" , silent = true }
 )
 vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]],
-    { desc = "Copy file name to clipboard" }
+    { desc = "Copy file name to clipboard", silent = true }
 )
 
 vim.api.nvim_create_autocmd("TextYankPost", {

@@ -4,7 +4,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 
-vim.keymap.set('n', '<leader>fw', builtin.grep_string,
+vim.keymap.set({'n', 'v'}, '<leader>fw', builtin.grep_string,
     { desc = 'Searches for the string under your cursor or selection in your current working directory' }
 )
 
