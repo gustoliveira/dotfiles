@@ -1,18 +1,35 @@
+# Colors
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export BOLD_WHITE='\033[1;97m'
+export NC='\033[0m'
+
+
 if [ -f /usr/share/autojump/autojump.sh ]; then
     . /usr/share/autojump/autojump.sh
 fi
 
+
 # Aliases
 alias update='sudo apt update ; sudo apt upgrade ; sudo apt autoremove ; sudo apt autoclean'
 alias c='clear'
-alias copy='xclip -sel clip'
-alias ls='exa'
 alias lsa='ls -la'
-alias history='history|rg'
-alias man='tldr'
+if which xclip >/dev/null; then alias copy='xclip -sel clip'; fi
+if which exa >/dev/null; then alias ls='exa'; fi
+if which tldr >/dev/null; then alias man='tldr'; fi
+if which tldr >/dev/null; then alias man='tldr'; fi
+
 
 # Git aliases
+is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
 git() {
+    if [[ ($1 == "c" || $1 == "ca" || $1 == "cr" || $1 == "db" || $1 == "cb") && $is_fzf_installed == false  ]]; then
+        echo -e "${RED}You can't use this alias! Please install ${BLUE}fzf${RED} before using it.${NC}"
+        return
+    fi
+
     if [[ $1 == "frm" ]]; then
         git restore . ; git fetch upstream ; git checkout master ; git rebase upstream/master ; git push ; git branch
 
@@ -33,30 +50,32 @@ git() {
         shift
         git add . ; git commit -m "$@" ; git push
 
-    elif [[ $1 == "c" ]]; then
+    elif [[ $1 == "c" && $is_fzf_installed == true ]]; then
         shift
         git checkout $(git branch | fzf | tr -d "[[:space:]]")
 
-    elif [[ $1 == "ca" ]]; then
+    elif [[ $1 == "ca" && $is_fzf_installed == true ]]; then
         shift
         git checkout $(git branch --all | fzf | tr -d "[[:space:]]")
 
-    elif [[ $1 == "cr" ]]; then
+    elif [[ $1 == "cr" && $is_fzf_installed == true ]]; then
         shift
         git checkout $(git branch --r | fzf | tr -d "[[:space:]]")
 
-    elif [[ $1 == "db" ]]; then
+    elif [[ $1 == "db" && $is_fzf_installed == true ]]; then
         shift
-        git branch -D $(git branch --all | fzf | tr -d "[[:space:]]")
+        current_branch=$(git rev-parse --abbrev-ref HEAD)
+        git branch -D $(git branch --all | grep -v $current_branch | fzf --multi | tr '\n' ' ')
 
-    elif [[ $1 == "cb" ]]; then
+    elif [[ $1 == "cb" && $is_fzf_installed == true ]]; then
         shift
-        git branch --all | fzf | copy
+        git branch --all | fzf | tr -d "[' ', '\n', '*']" | copy
 
     else
         command git "$@"
     fi
 }
+
 
 # Flutter aliases
 flutter() {
