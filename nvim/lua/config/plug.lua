@@ -14,11 +14,7 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'ryanoasis/vim-devicons'
 
-Plug('mg979/vim-visual-multi', { branch = 'master' })
-
 Plug 'jiangmiao/auto-pairs'
-
-Plug('ThePrimeagen/harpoon', { branch = 'harpoon2' })
 
 Plug 'nvim-lua/plenary.nvim'
 
@@ -50,9 +46,6 @@ Plug('prettier/vim-prettier', {
   ['do'] = 'yarn install --frozen-lockfile --production',
   ['for'] = {'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html', 'javascriptreact'
 }})
-
-Plug 'ggandor/leap.nvim'
-Plug 'tpope/vim-repeat'
 
 Plug 'github/copilot.vim'
 

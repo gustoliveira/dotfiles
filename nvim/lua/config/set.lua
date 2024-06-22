@@ -22,7 +22,7 @@ vim.opt.signcolumn = 'yes'      -- Add a column on the left. Useful for linting
 
 vim.opt.cmdheight = 1           -- Give more space for displaying messages
 vim.opt.showmode = false        -- Don't show mode in the cmdline only in lualine
-vim.opt.updatetime = 50         -- Time in miliseconds to consider the changes
+vim.opt.updatetime = 100         -- Time in miliseconds to consider the changes
 vim.opt.encoding = 'utf-8'      -- The encoding should be utf-8 to activate the font icons
 vim.opt.backup = false          -- No backup files
 -- vim.opt.nowritebackup = true   -- No backup files
