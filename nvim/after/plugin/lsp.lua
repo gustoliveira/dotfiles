@@ -1,7 +1,7 @@
 local lsp_zero = require('lsp-zero')
+local mason = require('mason')
+local mason_lsp = require('mason-lspconfig')
 local lsp_config = require('lspconfig')
-local cmp = require('cmp')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lsp_zero.preset('recommended')
 
@@ -29,10 +29,26 @@ vim.diagnostic.config({
     signs = false,
 })
 
+-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
+mason.setup({
+  ui = {
+    keymaps = {
+      apply_language_filter = "<C-a>",
+    }
+  },
+})
+mason_lsp.setup({
+	ensure_installed = {'tsserver', 'cssls', 'html', 'gopls', 'kotlin_language_server'},
+	handlers = {
+		function(server_name)
+			require('lspconfig')[server_name].setup({})
+		end,
+	},
+})
+
 -- Dart LSP Config
-lsp_config["dartls"].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+lsp_config.dartls.setup({
+    -- capabilities = capabilities,
     settings = {
         dart = {
             analysisExcludedFolders = {
@@ -45,30 +61,3 @@ lsp_config["dartls"].setup({
     }
 })
 
--- Ruby LSP Config
-lsp_config["ruby_lsp"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
--- JavaScrip and TypeScript LSP Config
-lsp_config["tsserver"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
--- HTML LSP Config
-lsp_config["html"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
--- Python LSP Config
-lsp_config["pyright"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
-lsp_zero.setup()
-
-require("fidget").setup({})

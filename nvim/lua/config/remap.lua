@@ -27,6 +27,8 @@ vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]],
     { desc = "Copy file name to clipboard", silent = true }
 )
 
+vim.keymap.set("n", "<leader>w", [[:w<CR>]])
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = vim.api.nvim_create_augroup("hihlight_yank", { clear = true }),
