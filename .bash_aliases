@@ -33,15 +33,6 @@ git() {
     if [[ $1 == "frm" ]]; then
         git restore . ; git fetch upstream ; git checkout master ; git rebase upstream/master ; git push ; git branch
 
-    elif [[ $1 == "s" ]]; then
-	    git status
-
-    elif [[ $1 == "b" ]]; then
-	    git branch
-
-    elif [[ $1 == "p" ]]; then
-	    git push
-
     elif [[ $1 == "cm" ]]; then
         shift
         git add . ; git commit -m "$@"

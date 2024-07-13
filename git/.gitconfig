@@ -1,0 +1,18 @@
+[user]
+	name = Gustavo de Oliveira
+	email = gust.oliveira.ferreira@gmail.com
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = nvim
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[init]
+	defaultBranch = main
+[alias]
+  lg = log --graph --oneline --all
+	fp = fetch --all --prune
+	s = status
+	b = branch
+	p = push
+	cm = commit -m
+	
