@@ -2,6 +2,10 @@ local lsp_zero = require('lsp-zero')
 local mason = require('mason')
 local mason_lsp = require('mason-lspconfig')
 local lsp_config = require('lspconfig')
+local null_ls = require("null-ls")
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 lsp_zero.preset('recommended')
 
@@ -29,7 +33,6 @@ vim.diagnostic.config({
     signs = false,
 })
 
--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
 mason.setup({
   ui = {
     keymaps = {
@@ -37,8 +40,9 @@ mason.setup({
     }
   },
 })
+
 mason_lsp.setup({
-	ensure_installed = {'tsserver', 'cssls', 'html', 'gopls', 'kotlin_language_server'},
+	ensure_installed = {'tsserver', 'cssls', 'html', 'gopls'},
 	handlers = {
 		function(server_name)
 			require('lspconfig')[server_name].setup({})
@@ -46,18 +50,88 @@ mason_lsp.setup({
 	},
 })
 
--- Dart LSP Config
 lsp_config.dartls.setup({
-    -- capabilities = capabilities,
-    settings = {
-        dart = {
-            analysisExcludedFolders = {
-                vim.fn.expand("$HOME/AppData/Local/Pub/Cacha"),
-                vim.fn.expand("$HOME/.pub-cache"),
-                vim.fn.expand("$HOME/tools/flutter"),
-                vim.fn.expand("opt/homebrew/"),
-            }
-        }
+  capabilities = capabilities,
+  settings = {
+    dart = {
+      analysisExcludedFolders = {
+        vim.fn.expand("$HOME/AppData/Local/Pub/Cacha"),
+        vim.fn.expand("$HOME/.pub-cache"),
+        vim.fn.expand("$HOME/tools/flutter"),
+        vim.fn.expand("opt/homebrew/"),
+      }
     }
+  },
+  on_attach = function(client, bufnr)
+    vim.g.dart_format_on_save = 1
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({
+        group = augroup,
+        buffer = bufnr,
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = augroup,
+        pattern = "dart",
+        command = "setlocal shiftwidth=2 tabstop=2"
+      })
+    end
+  end,
+})
+
+lsp_config.tsserver.setup({
+  capabilities = capabilities,
+  settings = {
+    dart = {
+      analysisExcludedFolders = {
+        vim.fn.expand("$HOME/AppData/Local/Pub/Cacha"),
+        vim.fn.expand("$HOME/.pub-cache"),
+        vim.fn.expand("$HOME/tools/flutter"),
+        vim.fn.expand("opt/homebrew/"),
+      }
+    }
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
+        command = "setlocal shiftwidth=2 tabstop=2"
+      })
+    end
+  end,
+})
+
+lsp_config.gopls.setup({
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+  capabilities = capabilities,
+  sources = {
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports_reviser,
+    null_ls.builtins.formatting.golines,
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({
+        group = augroup,
+        buffer = bufnr,
+      })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
+  end,
+  cmd = { "gopls" },
+  fyletypes = { "go", "gomod", "gowork", "gotmpl" },
 })
 
