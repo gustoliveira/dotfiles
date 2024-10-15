@@ -27,6 +27,7 @@ Plug 'github/copilot.vim'
 Plug 'stevearc/oil.nvim'
 
 Plug 'folke/trouble.nvim'
+Plug 'folke/todo-comments.nvim'
 
 Plug 'mbbill/undotree'
 
@@ -50,17 +51,6 @@ Plug('L3MON4D3/LuaSnip', {['do'] = 'make install_jsregexp'})
 
 Plug 'mhinz/vim-signify'
 
--- -- LSP Support - lsp-zero
--- Plug 'neovim/nvim-lspconfig'
---
--- -- Autocompletion
--- Plug 'hrsh7th/nvim-cmp'
--- Plug 'hrsh7th/cmp-nvim-lsp'
--- Plug 'L3MON4D3/LuaSnip'
--- Plug('VonHeikemen/lsp-zero.nvim', {branch = 'v3.x'})
--- Plug "rafamadriz/friendly-snippets"
--- Plug "saadparwaiz1/cmp_luasnip"
---
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'MunifTanjim/eslint.nvim'
 
@@ -74,5 +64,9 @@ Plug 'Mofiqul/vscode.nvim'
 Plug 'askfiy/visual_studio_code'
 
 Plug 'tiagovla/tokyodark.nvim'
+
+-- TODO: Add remap to toggle hot-reload. It stop the server when I running in web
+Plug 'reisub0/hot-reload.vim'     -- Flutter hot relaod
+Plug 'dart-lang/dart-vim-plugin'  -- Autoformat on save
 
 vim.call('plug#end')

@@ -1,8 +1,8 @@
 local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
-	ensure_installed = { "lua", "vim", "json", "yaml", "typescript", "javascript", "html", "css", "scss", "tsx", "python", "rust", "go", "bash", "dockerfile", "jsonc", "graphql", "ruby", "yaml" },
-	ignore_install = { "javascript"  },
+	ensure_installed = { "lua", "vim", "json", "yaml", "javascript", "html", "css", "scss", "tsx", "python", "rust", "go", "bash", "dockerfile", "jsonc", "graphql", "ruby", "yaml" },
+	ignore_install = { "javascript" },
 	modules = {  },
 	sync_install = false,
 	auto_install = true,

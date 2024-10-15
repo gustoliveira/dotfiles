@@ -13,6 +13,7 @@ lsp_zero.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  client.server_capabilities.semanticTokensProvider = nil
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -20,10 +21,11 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("n", "<leader><C-h>", function() vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set('n', '<space>pr', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<leader>pr', function() vim.lsp.buf.format { async = true } end, opts)
 
   vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+
   vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set("n", "<leader>dl", function() vim.diagnostic.setqflist() end, opts)
 end)
@@ -42,7 +44,7 @@ mason.setup({
 })
 
 mason_lsp.setup({
-	ensure_installed = {'tsserver', 'cssls', 'html', 'gopls'},
+	ensure_installed = {'ts_ls', 'cssls', 'html', 'gopls'},
 	handlers = {
 		function(server_name)
 			require('lspconfig')[server_name].setup({})
@@ -50,8 +52,17 @@ mason_lsp.setup({
 	},
 })
 
+
 lsp_config.dartls.setup({
   capabilities = capabilities,
+  filetypes = { "dart" },
+  init_options = {
+    onlyAnalyzeProjectsWithOpenFiles = false,
+    suggestFromUnimportedLibraries = true,
+    closingLabels = true,
+    outline = false,
+    flutterOutline = false,
+  },
   settings = {
     dart = {
       analysisExcludedFolders = {
@@ -59,11 +70,15 @@ lsp_config.dartls.setup({
         vim.fn.expand("$HOME/.pub-cache"),
         vim.fn.expand("$HOME/tools/flutter"),
         vim.fn.expand("opt/homebrew/"),
-      }
+      },
+      updateImportsOnRename = true,
+      completeFunctionCalls = true,
+      showTodos = true,
     }
   },
   on_attach = function(client, bufnr)
     vim.g.dart_format_on_save = 1
+
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({
         group = augroup,
@@ -72,13 +87,13 @@ lsp_config.dartls.setup({
       vim.api.nvim_create_autocmd("FileType", {
         group = augroup,
         pattern = "dart",
-        command = "setlocal shiftwidth=2 tabstop=2"
+        command = "setlocal shiftwidth=2 tabstop=2",
       })
     end
   end,
 })
 
-lsp_config.tsserver.setup({
+lsp_config.ts_ls.setup({
   capabilities = capabilities,
   settings = {
     dart = {
@@ -90,7 +105,7 @@ lsp_config.tsserver.setup({
       }
     }
   },
-  on_attach = function(client, bufnr)
+  on_attach = function(client, _)
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },

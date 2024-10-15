@@ -4,7 +4,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 
-vim.keymap.set({'n', 'v'}, '<leader>fw', builtin.grep_string,
+vim.keymap.set({ 'n', 'v' }, '<leader>fw', builtin.grep_string,
     { desc = 'Searches for the string under your cursor or selection in your current working directory' }
 )
 
@@ -18,7 +18,7 @@ vim.keymap.set('n', '<leader>/',
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
             winblend = 0,
             previewer = false,
-            layout_config = { height = 0.5 }
+            layout_config = { height = 0.8, width = 0.4 },
         })
     end,
     { desc = '[/] Fuzzily search in current buffer' }
@@ -35,7 +35,7 @@ telescope.setup {
     },
     extensions = {
         ["ui-select"] = {
-            require("telescope.themes").get_dropdown {  }
+            require("telescope.themes").get_dropdown {}
         }
     },
     defaults = {
@@ -61,4 +61,3 @@ telescope.setup {
 }
 
 require("telescope").load_extension("ui-select")
-
