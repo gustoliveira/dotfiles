@@ -1,0 +1,13 @@
+let mapleader=" "
+
+set relativenumber = true
+set ideajoin
+set scrolloff=10
+
+map <leader>l V<Action>(ReformatCode)
+map <leader>rn <Action>(RenameElement)
+nnoremap <leader>ca :action Refactorings.QuickListPopupAction<CR>
+
+" --- IdeaVim plugins
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'

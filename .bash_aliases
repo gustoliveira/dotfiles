@@ -22,6 +22,7 @@ if which tldr >/dev/null; then alias man='tldr'; fi
 if which tldr >/dev/null; then alias man='tldr'; fi
 
 alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/"'
+go-reshim
 
 # Git aliases
 is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
