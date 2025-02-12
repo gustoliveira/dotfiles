@@ -12,6 +12,7 @@ vim.keymap.set('n', '<leader><leader>', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fof', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { noremap = true, silent = true, desc = '[F]ind [R]eferences' })
 
 vim.keymap.set('n', '<leader>/',
     function()

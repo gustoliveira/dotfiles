@@ -26,7 +26,7 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 
-  vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, opts)
   vim.keymap.set("n", "<leader>dl", function() vim.diagnostic.setqflist() end, opts)
 end)
 

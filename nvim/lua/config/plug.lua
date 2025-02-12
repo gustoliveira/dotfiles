@@ -69,4 +69,6 @@ Plug 'tiagovla/tokyodark.nvim'
 Plug 'reisub0/hot-reload.vim'     -- Flutter hot relaod
 Plug 'dart-lang/dart-vim-plugin'  -- Autoformat on save
 
+Plug 'TobinPalmer/rayso.nvim'
+
 vim.call('plug#end')

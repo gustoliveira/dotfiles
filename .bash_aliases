@@ -11,6 +11,8 @@ if [ -f /usr/share/autojump/autojump.sh ]; then
     . /usr/share/autojump/autojump.sh
 fi
 
+is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
+
 # Aliases
 alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/"'
 alias update='sudo apt update ; sudo apt upgrade ; sudo apt autoremove ; sudo apt autoclean'
@@ -19,7 +21,7 @@ alias lsa='ls -la'
 if which xclip >/dev/null; then alias copy='xclip -sel clip'; fi
 if which exa >/dev/null; then alias ls='exa'; fi
 if which tldr >/dev/null; then alias man='tldr'; fi
-if which rg >/dev/null; then alias grep='rg'; fi
+if $is_fzf_installed; then alias cdf='cd $(ls -d .?*/ */ | fzf)'; fi
 
 
 if [ -f "$HOME/.asdf/asdf.sh" ] && [ -f "$HOME/.asdf/completions/asdf.bash" ]; then
@@ -29,7 +31,6 @@ if [ -f "$HOME/.asdf/asdf.sh" ] && [ -f "$HOME/.asdf/completions/asdf.bash" ]; t
 fi
 
 # Git aliases
-is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
 git() {
     if [[ ($1 == "c" || $1 == "ca" || $1 == "cr" || $1 == "db" || $1 == "cb") && $is_fzf_installed == false  ]]; then
         echo -e "${RED}You can't use this alias! Please install ${BLUE}fzf${RED} before using it.${NC}"
