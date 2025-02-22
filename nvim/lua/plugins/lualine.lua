@@ -1,7 +1,7 @@
-local lualine = require("lualine")
-
-lualine.setup {
-  options = {
+return {
+  'nvim-lualine/lualine.nvim',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  opts = {
     icons_enabled = true,
     theme = 'onedark',
     component_separators = { left = '', right = ''},
@@ -63,6 +63,10 @@ lualine.setup {
       }
     },
   },
-  extensions = {}
+  config = function(_, opts) 
+    require("lualine").setup {
+      options = opts,
+      extensions = {},
+    }
+  end
 }
-
