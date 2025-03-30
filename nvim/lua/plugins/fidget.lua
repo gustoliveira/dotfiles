@@ -1,8 +1,7 @@
 return {
   "j-hui/fidget.nvim",
-  config = function(_, opts)
+  config = function(_, _)
     require("fidget").setup({
-      -- Options related to LSP progress subsystem
       progress = {
         poll_rate = 0,                -- How and when to poll for progress messages
         suppress_on_insert = false,   -- Suppress new messages while in insert mode
@@ -94,6 +93,6 @@ return {
         string.format("%s/fidget.nvim.log", vim.fn.stdpath("cache")),
       },
     })
-  end 
+  end
 }
 

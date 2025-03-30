@@ -11,7 +11,9 @@ return {
   config = function()
     local lsp_config = require("lspconfig")
     local null_ls = require("null-ls")
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+    local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities(cmp_capabilities)
 
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -19,19 +21,19 @@ return {
 
     local lspconfig_defaults = lsp_config.util.default_config
     lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    lspconfig_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
+      'force',
+      lspconfig_defaults.capabilities,
+      require('cmp_nvim_lsp').default_capabilities()
     )
 
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'LSP actions',
       callback = function(event)
-        local opts = {buffer = event.buf}
+        local opts = { buffer = event.buf }
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set({"n", "v"}, "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
         vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("n", "<leader><C-h>", function() vim.lsp.buf.signature_help() end, opts)
@@ -52,10 +54,12 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = {'ts_ls', 'lua_ls', 'gopls'},
+      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls', 'ruby_lsp' },
       handlers = {
         function(server_name)
-          require('lspconfig')[server_name].setup({})
+          lsp_config[server_name].setup {
+            capabilities = capabilities
+          }
         end,
       },
     })
@@ -87,6 +91,8 @@ return {
       on_attach = function(client, bufnr)
         vim.g.dart_format_on_save = 1
 
+        client.server_capabilities.semanticTokensProvider = nil
+
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
             group = augroup,
@@ -103,16 +109,6 @@ return {
 
     lsp_config.ts_ls.setup({
       capabilities = capabilities,
-      settings = {
-        dart = {
-          analysisExcludedFolders = {
-            vim.fn.expand("$HOME/AppData/Local/Pub/Cacha"),
-            vim.fn.expand("$HOME/.pub-cache"),
-            vim.fn.expand("$HOME/tools/flutter"),
-            vim.fn.expand("opt/homebrew/"),
-          }
-        }
-      },
       on_attach = function(client, _)
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("FileType", {
@@ -157,6 +153,5 @@ return {
       cmd = { "gopls" },
       fyletypes = { "go", "gomod", "gowork", "gotmpl" },
     })
-
   end
 }
