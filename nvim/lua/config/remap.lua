@@ -29,6 +29,8 @@ vim.keymap.set({"n", "v"}, "<leader>cf", [[:let @+=expand('%:t')<CR>]],
 
 vim.keymap.set("n", "<leader>w", [[:w<CR>]])
 
+vim.keymap.set("n", "<leader>l", [[<C-^>]])
+
 vim.g.javascript_format_on_save = 1
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
