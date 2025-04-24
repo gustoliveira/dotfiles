@@ -10,7 +10,7 @@ return {
         hide_during_completion = false,
         debounce = 25,
         keymap = {
-          accept_line = "<Tab>",
+          -- accept_line = "<Tab>",
           accept = "<C-y>",
           dismiss = "<C-n>",
         },

@@ -88,10 +88,11 @@ return {
           showTodos = true,
         }
       },
+      on_init = function(client, _)
+        client.server_capabilities.semanticTokensProvider = nil
+      end,
       on_attach = function(client, bufnr)
         vim.g.dart_format_on_save = 1
-
-        client.server_capabilities.semanticTokensProvider = nil
 
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
@@ -106,6 +107,22 @@ return {
         end
       end,
     })
+
+    lsp_config.pyright.setup {
+      settings = { pyright = { autoImportCompletion = true, }, python = { analysis = { autoSearchPaths = true, diagnosticMode = 'openFilesOnly', useLibraryCodeForTypes = true, typeCheckingMode = 'off' } } } }
+
+    lsp_config.pyright.setup({
+      capabilities = capabilities,
+      on_attach = function(client, _)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
+            command = "setlocal shiftwidth=2 tabstop=2"
+          })
+        end
+      end,
+    })
+
 
     lsp_config.ts_ls.setup({
       capabilities = capabilities,
