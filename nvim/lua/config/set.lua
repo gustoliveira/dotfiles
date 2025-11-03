@@ -32,6 +32,11 @@ vim.opt.splitbelow = true       -- Create the horizontal splits below
 
 vim.opt.autoread = true         -- Update vim after file update from outside
 
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+
 vim.opt.mouse="a"                 -- Enable mouse support
 
 vim.cmd('filetype on')                  -- Detect and vim.opt.the filetype option and trigger the FileType Event

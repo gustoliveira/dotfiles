@@ -54,7 +54,7 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls', 'ruby_lsp' },
+      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls' },
       handlers = {
         function(server_name)
           lsp_config[server_name].setup {

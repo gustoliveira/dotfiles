@@ -15,7 +15,7 @@ is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
 
 # Aliases
 alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/"'
-alias update='sudo apt update ; sudo apt upgrade ; sudo apt autoremove ; sudo apt autoclean'
+alias update='sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confold" update && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confold" upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean'
 alias c='clear'
 alias lsa='ls -la'
 if which xclip >/dev/null; then alias copy='xclip -sel clip'; fi

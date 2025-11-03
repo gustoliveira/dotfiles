@@ -1,7 +1,7 @@
 return {
   'numToStr/Navigator.nvim',
   opts = {
-    auto_save = 'current',
+    auto_save = false,
     disable_on_zoom = true
   },
   config = function(_, opts)
