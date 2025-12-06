@@ -9,7 +9,6 @@ return {
     'nvimtools/none-ls.nvim',
   },
   config = function()
-    local lsp_config = require("lspconfig")
     local null_ls = require("null-ls")
 
     local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -18,13 +17,6 @@ return {
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     vim.diagnostic.config({ virtual_text = true, signs = false })
-
-    local lspconfig_defaults = lsp_config.util.default_config
-    lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-      'force',
-      lspconfig_defaults.capabilities,
-      require('cmp_nvim_lsp').default_capabilities()
-    )
 
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'LSP actions',
@@ -57,17 +49,19 @@ return {
       ensure_installed = { 'ts_ls', 'lua_ls', 'gopls' },
       handlers = {
         function(server_name)
-          lsp_config[server_name].setup {
+          vim.lsp.enable(server_name, {
             capabilities = capabilities
-          }
+          })
         end,
       },
     })
 
 
-    lsp_config.dartls.setup({
-      capabilities = capabilities,
+    vim.lsp.config.dartls = {
+      cmd = { 'dartls' },
       filetypes = { "dart" },
+      root_markers = { 'pubspec.yaml' },
+      capabilities = capabilities,
       init_options = {
         onlyAnalyzeProjectsWithOpenFiles = false,
         suggestFromUnimportedLibraries = true,
@@ -106,12 +100,43 @@ return {
           })
         end
       end,
-    })
+    }
+    vim.lsp.enable('dartls')
 
-    lsp_config.pyright.setup {
-      settings = { pyright = { autoImportCompletion = true, }, python = { analysis = { autoSearchPaths = true, diagnosticMode = 'openFilesOnly', useLibraryCodeForTypes = true, typeCheckingMode = 'off' } } } }
+    vim.lsp.config.pyright = {
+      cmd = { 'pyright-langserver', '--stdio' },
+      filetypes = { 'python' },
+      root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json' },
+      capabilities = capabilities,
+      settings = {
+        pyright = {
+          autoImportCompletion = true,
+        },
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = 'openFilesOnly',
+            useLibraryCodeForTypes = true,
+            typeCheckingMode = 'off'
+          }
+        }
+      },
+      on_attach = function(client, _)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
+            command = "setlocal shiftwidth=2 tabstop=2"
+          })
+        end
+      end,
+    }
+    vim.lsp.enable('pyright')
 
-    lsp_config.pyright.setup({
+
+    vim.lsp.config.ts_ls = {
+      cmd = { 'typescript-language-server', '--stdio' },
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
       capabilities = capabilities,
       on_attach = function(client, _)
         if client.supports_method("textDocument/formatting") then
@@ -121,22 +146,14 @@ return {
           })
         end
       end,
-    })
+    }
+    vim.lsp.enable('ts_ls')
 
-
-    lsp_config.ts_ls.setup({
+    vim.lsp.config.gopls = {
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_markers = { 'go.work', 'go.mod', '.git' },
       capabilities = capabilities,
-      on_attach = function(client, _)
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_create_autocmd("FileType", {
-            pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
-            command = "setlocal shiftwidth=2 tabstop=2"
-          })
-        end
-      end,
-    })
-
-    lsp_config.gopls.setup({
       settings = {
         gopls = {
           analyses = {
@@ -146,7 +163,6 @@ return {
           gofumpt = true,
         },
       },
-      capabilities = capabilities,
       sources = {
         null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports_reviser,
@@ -167,8 +183,7 @@ return {
           })
         end
       end,
-      cmd = { "gopls" },
-      fyletypes = { "go", "gomod", "gowork", "gotmpl" },
-    })
+    }
+    vim.lsp.enable('gopls')
   end
 }
