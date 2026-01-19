@@ -6,6 +6,7 @@ export BLUE='\033[0;34m'
 export BOLD_WHITE='\033[1;97m'
 export NC='\033[0m'
 
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 if [ -f /usr/share/autojump/autojump.sh ]; then
     . /usr/share/autojump/autojump.sh
@@ -17,12 +18,13 @@ is_fzf_installed=$(which fzf >/dev/null && echo true || echo false)
 alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/"'
 alias update='sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confold" update && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confold" upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean'
 alias c='clear'
+alias fclear='clear && printf "\e[3J"'
 alias lsa='ls -lha'
 if which xclip >/dev/null; then alias copy='xclip -sel clip'; fi
-if which exa >/dev/null; then alias ls='exa'; fi
+if which eza >/dev/null; then alias ls='eza'; fi
 if which tldr >/dev/null; then alias man='tldr'; fi
 if $is_fzf_installed; then alias cdf='cd $(ls -d .?*/ */ | fzf)'; fi
-
+if which docker >/dev/null; then alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}"'; fi
 
 if [ -f "$HOME/.asdf/asdf.sh" ] && [ -f "$HOME/.asdf/completions/asdf.bash" ]; then
     . "$HOME/.asdf/asdf.sh"
@@ -58,7 +60,7 @@ git() {
 
     elif [[ $1 == "cr" && $is_fzf_installed == true ]]; then
         shift
-        git checkout $(git branch --r | fzf | tr -d "[[:space:]]")
+        git checkout $(git branch --remote | fzf | tr -d "[[:space:]]")
 
     elif [[ $1 == "db" && $is_fzf_installed == true ]]; then
         shift
@@ -156,4 +158,33 @@ meu_loading() {
 
         kill $!
     )
+}
+
+fzfservers() {
+    local YAML_FILE="$HOME/.oxeancli.yaml"
+    awk '
+    /root@/ {
+        if (host) print (name ? name : host) "\t" host
+        host=$1; sub(/:$/, "", host); name=""
+    }
+    /name:/ {
+        name=$2
+    }
+    END {
+        if (host) print (name ? name : host) "\t" host
+    }
+    ' "$YAML_FILE" | fzf --delimiter=$'\t' --with-nth=1 --height=40% --layout=reverse | awk -F'\t' '{print $2}'
+}
+
+oxeancli() {
+    if [[ "$1" == "ssh" && -z "$2" ]]; then
+        local target
+        target=$(fzfservers)
+        if [[ -n "$target" ]]; then
+            command oxeancli ssh "$target"
+        fi
+        return
+    fi
+
+    command oxeancli "$@"
 }
