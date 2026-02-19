@@ -4,6 +4,8 @@ require("config.remap")
 
 require("config.lazy")
 
+require("config.theme").load()
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = vim.api.nvim_create_augroup("hihlight_yank", { clear = true }),

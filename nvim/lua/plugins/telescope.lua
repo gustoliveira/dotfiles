@@ -8,6 +8,8 @@ return {
   config = function()
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
+    local actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
 
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
@@ -19,7 +21,25 @@ return {
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>fof', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { noremap = true, silent = true, desc = '[F]ind [R]eferences' })
-    vim.keymap.set('n', '<leader>ft', builtin.colorscheme, { noremap = true, silent = true, desc = '[F]ind [T]heme' })
+    vim.keymap.set('n', '<leader>ft', function()
+      builtin.colorscheme({
+        enable_preview = true,
+        attach_mappings = function(prompt_bufnr, map)
+          local function select_theme()
+            local selection = action_state.get_selected_entry()
+            actions.select_default(prompt_bufnr)
+
+            if selection and selection.value then
+              require("config.theme").save(selection.value)
+            end
+          end
+
+          map('i', '<CR>', select_theme)
+          map('n', '<CR>', select_theme)
+          return true
+        end,
+      })
+    end, { noremap = true, silent = true, desc = '[F]ind [T]heme' })
     vim.keymap.set('n', '<leader>fj', builtin.jumplist, { noremap = true, silent = true, desc = '[F]ind [J]jumplist' })
     vim.keymap.set('n', '<leader>fb', builtin.builtin, { noremap = true, silent = true, desc = '[F]ind [B]uilt in commands' })
 
@@ -80,4 +100,3 @@ return {
     require("telescope").load_extension("ui-select")
   end
 }
-

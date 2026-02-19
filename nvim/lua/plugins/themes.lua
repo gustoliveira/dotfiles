@@ -20,7 +20,6 @@ return {
     },
     config = function(_, opts)
       require("tokyodark").setup(opts)
-      vim.cmd [[colorscheme tokyodark]]
     end,
   },
   -- Ligh Theme
@@ -31,7 +30,6 @@ return {
     priority = 1000,
     config = function()
       require('github-theme').setup({})
-      vim.cmd('colorscheme github_light')
     end,
   }
 }
