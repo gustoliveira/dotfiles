@@ -11,6 +11,14 @@ return {
   config = function()
     local null_ls = require("null-ls")
 
+    local function is_executable(cmd)
+      local binary = cmd
+      if type(cmd) == "table" then
+        binary = cmd[1]
+      end
+      return vim.fn.executable(binary) == 1
+    end
+
     local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
     local capabilities = require('blink.cmp').get_lsp_capabilities(cmp_capabilities)
 
@@ -46,7 +54,7 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls' },
+      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls', 'pyright' },
       handlers = {
         function(server_name)
           vim.lsp.enable(server_name, {
@@ -58,7 +66,7 @@ return {
 
 
     vim.lsp.config.dartls = {
-      cmd = { 'dartls' },
+      cmd = { 'dart', 'language-server', '--protocol=lsp' },
       filetypes = { "dart" },
       root_markers = { 'pubspec.yaml' },
       capabilities = capabilities,
@@ -101,7 +109,11 @@ return {
         end
       end,
     }
-    vim.lsp.enable('dartls')
+    if is_executable(vim.lsp.config.dartls.cmd) then
+      vim.lsp.enable('dartls')
+    else
+      vim.notify('LSP dartls nao habilitado: comando "dart" nao encontrado no PATH', vim.log.levels.WARN)
+    end
 
     vim.lsp.config.pyright = {
       cmd = { 'pyright-langserver', '--stdio' },
@@ -130,7 +142,11 @@ return {
         end
       end,
     }
-    vim.lsp.enable('pyright')
+    if is_executable(vim.lsp.config.pyright.cmd) then
+      vim.lsp.enable('pyright')
+    else
+      vim.notify('LSP pyright nao habilitado: comando "pyright-langserver" nao encontrado no PATH', vim.log.levels.WARN)
+    end
 
 
     vim.lsp.config.ts_ls = {
