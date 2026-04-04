@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
+  "plugin": ["opencode-gemini-auth@latest"],
   "permission": {
     "read": {
       "*.env": "ask",       
@@ -14,7 +14,20 @@
       "*": "ask"
     },
     "bash": {
-      "*": "ask"
+      "*": "ask",
+      "git *": "ask",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git show": "allow",
+      "git show *": "allow",
+      "docker ps": "allow",
+      "docker ps *": "allow",
+      "docker compose logs": "allow",
+      "docker compose logs *": "allow"
     },
     "list": {
       "*": "allow"
