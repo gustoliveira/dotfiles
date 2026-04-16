@@ -96,7 +96,7 @@ return {
       on_attach = function(client, bufnr)
         vim.g.dart_format_on_save = 1
 
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
             group = augroup,
             buffer = bufnr,
@@ -134,7 +134,7 @@ return {
         }
       },
       on_attach = function(client, _)
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("FileType", {
             pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
             command = "setlocal shiftwidth=2 tabstop=2"
@@ -155,7 +155,7 @@ return {
       root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
       capabilities = capabilities,
       on_attach = function(client, _)
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("FileType", {
             pattern = { "*.js", "*.html", "*.jsx", "*.css", "*.scss" },
             command = "setlocal shiftwidth=2 tabstop=2"
@@ -185,7 +185,7 @@ return {
         null_ls.builtins.formatting.golines,
       },
       on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
             group = augroup,
             buffer = bufnr,
